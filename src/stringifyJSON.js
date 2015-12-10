@@ -28,22 +28,21 @@ var stringifyJSON = function(obj) {
 
   if(Array.isArray(obj)){ // Arrays get stringified.
 
-  	 // Add double quotes to strings in arrays.
+  	 
   	 for(var i = 0; i < obj.length; i++){
-
+       // Replace undefined and functions with null in arrays;
   	 	if(obj[i] === undefined || typeof obj[i] === 'function' ){
-  	 		obj[i] = null; // Replace undefined and functions with null in arrays;
+  	 		obj[i] = null;
   	 	}
-
-  	 	obj[i] = stringifyJSON(obj[i]) // Recursion! Gets into nested arrays and also ""-ifies strings
-  	 	if(obj[i] === undefined || typeof obj[i] === 'function' ){
-  	 		//obj[i] = null; // Replace undefined and functions with null in arrays;
-  	 	}
+      // Recursion! Gets into nested arrays and also ""-ifies strings
+  	 	obj[i] = stringifyJSON(obj[i])
+  	 
   	 }
 
-  	// Stringify the array, then add brackets as strings.
+  	// Join/stringify the array, then add brackets to each end.
 
-  	var arrayStringified = obj.toString();
+  	var arrayStringified = obj.join(','); 
+
   	return '['+arrayStringified+']';
   }
   
